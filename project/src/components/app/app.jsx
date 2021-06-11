@@ -7,22 +7,25 @@ import AuthScreen from '../login-screen/auth-screen';
 import FavoritesScreen from '../favorites-screen/favorites-screen';
 import RoomScreen from '../room-screen/room-screen';
 import NotFoundScreen from '../not-found-screed/not-found-screen';
+import roomProp from '../room-screen/room-screen';
 
-function App({cards}) {
+function App(props) {
+  const {offers} = props;
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <Main cards={cards} />
+          <Main offers={offers} />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <AuthScreen />
         </Route>
         <Route exact path={AppRoute.FAVORITES}>
-          <FavoritesScreen />
+          <FavoritesScreen offers={offers} />
         </Route>
         <Route exact path={AppRoute.OFFER}>
-          <RoomScreen />
+          <RoomScreen offers={offers} />
         </Route>
         <Route>
           <NotFoundScreen />
@@ -33,17 +36,9 @@ function App({cards}) {
 }
 
 App.propTypes = {
-  cards: PropTypes.arrayOf(
-    PropTypes.shape({
-      img: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-      rating: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      isBookmark: PropTypes.bool.isRequired,
-      isPremium: PropTypes.bool.isRequired,
-    }),
-  ).isRequired,
+  offers: PropTypes.arrayOf(
+    PropTypes.oneOfType([roomProp]).isRequired,
+  ),
 };
 
 export default App;
