@@ -4,19 +4,10 @@ import roomProp from '../room-screen/room.prop';
 import Card from '../card/card';
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import { getFavoriteCities } from '../../utils/common';
 
 function FavoritesScreen(props) {
   const {offers} = props;
-
-  const getFavoriteCities = () => {
-    const filteredCities = offers
-      .filter((item) => item.isFavorite )
-      .map((item) => item.city.name);
-
-    return filteredCities
-      .filter((item, index) => index === filteredCities
-        .indexOf(item = item.trim()));
-  };
 
   const cities = getFavoriteCities();
 

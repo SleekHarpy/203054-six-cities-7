@@ -9,8 +9,7 @@ import RoomScreen from '../room-screen/room-screen';
 import NotFoundScreen from '../not-found-screed/not-found-screen';
 import roomProp from '../room-screen/room-screen';
 
-function App(props) {
-  const {offers} = props;
+function App({offers}) {
 
   return (
     <BrowserRouter>
