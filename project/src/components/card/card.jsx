@@ -44,9 +44,7 @@ function Card(props) {
 }
 
 Card.propTypes = {
-  offer: PropTypes.arrayOf(
-    PropTypes.oneOfType([roomProp]).isRequired,
-  ),
+  offer: PropTypes.oneOfType([roomProp]).isRequired,
 };
 
 export default Card;

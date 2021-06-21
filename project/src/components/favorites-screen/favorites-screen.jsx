@@ -9,7 +9,7 @@ import { getFavoriteCities } from '../../utils/common';
 function FavoritesScreen(props) {
   const {offers} = props;
 
-  const cities = getFavoriteCities();
+  const cities = getFavoriteCities(offers);
 
   return (
     <div className="page">

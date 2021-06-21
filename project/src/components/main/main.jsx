@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import roomProp from '../room-screen/room.prop';
 import OffersList from '../offers-list/offers-list';
 import Header from '../header/header';
+import Map from '../map/map';
 
 function Main(props) {
   const {offers} = props;
   const offersCount = offers.length;
+  const [selectedOffer, setSelectedOffer] = useState({});
+
+  const onListItemHover = (item) => {
+    setSelectedOffer(item);
+  };
 
   return (
     <>
@@ -86,10 +92,18 @@ function Main(props) {
                     <li className="places__option" tabIndex="0">Top rated first</li>
                   </ul>
                 </form>
-                <OffersList offers={offers} />
+                <OffersList
+                  offers={offers}
+                  onListItemHover={onListItemHover}
+                />
               </section>
               <div className="cities__right-section">
-                <section className="cities__map map"/>
+                <section className="cities__map map">
+                  <Map
+                    offers={offers}
+                    selectedOffer={selectedOffer}
+                  />
+                </section>
               </div>
             </div>
           </div>
