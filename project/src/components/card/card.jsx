@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import roomProp from '../room-screen/room.prop';
 import { Link } from 'react-router-dom';
 
-function Card(props) {
-  const {offer} = props;
+function Card({offer, onListItemHover}) {
   const {previewImage, price, ratingPercent, name, type, isFavorite, isPremium, id} = offer;
 
+  const listItemHoverHandler = () => {
+    onListItemHover(offer);
+  };
+
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card" onMouseEnter={listItemHoverHandler}>
       { isPremium &&  <div className="place-card__mark"><span>Premium</span></div> }
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`/offer/${id}`}>
@@ -45,6 +48,7 @@ function Card(props) {
 
 Card.propTypes = {
   offer: PropTypes.oneOfType([roomProp]).isRequired,
+  onListItemHover: PropTypes.func,
 };
 
 export default Card;
