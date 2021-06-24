@@ -37,7 +37,7 @@ function Map({offers, selectedOffer}) {
           .addTo(map);
       });
     }
-  }, [map, offers, selectedOffer]);
+  }, [map, currentCustomIcon, defaultCustomIcon, offers, selectedOffer]);
 
   return (
     <div

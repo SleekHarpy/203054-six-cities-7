@@ -9,9 +9,7 @@ function OffersList({offers, onListItemHover}) {
   return (
     <div className="near-places__list places__list">
       { offers.map((offer) => (
-        <li key={offer.id} >
-          <Card offer={offer} onListItemHover={onListItemHover} />
-        </li>
+        <Card offer={offer} key={offer.id} onListItemHover={onListItemHover} />
       )) }
     </div>
   );
