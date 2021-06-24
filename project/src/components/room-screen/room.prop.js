@@ -14,6 +14,11 @@ export default PropTypes.shape({
     isPro: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
   }),
+  location: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }),
   images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   maxAdults: PropTypes.number.isRequired,
   previewImage: PropTypes.string.isRequired,
