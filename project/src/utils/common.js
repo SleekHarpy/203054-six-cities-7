@@ -7,3 +7,5 @@ export const getFavoriteCities = (offers) => {
     .filter((item, index) => index === filteredCities
       .indexOf(item = item.trim()));
 };
+
+export const getSortedOffersList = (offers, city) => offers.filter((offer) => offer.city.name === city);
