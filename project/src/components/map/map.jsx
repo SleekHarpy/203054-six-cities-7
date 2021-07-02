@@ -4,11 +4,13 @@ import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
 import PropTypes from 'prop-types';
 import roomProp from '../room-screen/room.prop';
-import { CITY } from '../../const';
 
 function Map({offers, selectedOffer}) {
+  const [offer] = offers;
+  const location = [offer.city.latitude, offer.city.longitude];
   const mapRef = useRef(null);
-  const map = useMap(mapRef, CITY);
+  const map = useMap(mapRef, location);
+  const markers = leaflet.layerGroup();
 
   const defaultCustomIcon = leaflet.icon({
     iconUrl: 'img/pin.svg',
@@ -24,20 +26,27 @@ function Map({offers, selectedOffer}) {
 
   useEffect(() => {
     if (map) {
-      offers.forEach((offer) => {
-        leaflet
+      markers.clearLayers();
+      offers.forEach((offerItem) => {
+        const marker = leaflet
           .marker({
-            lat: offer.location.latitude,
-            lng: offer.location.longitude,
+            lat: offerItem.location.latitude,
+            lng: offerItem.location.longitude,
           }, {
-            icon: (offer.id === selectedOffer.id)
+            icon: (offerItem.id === selectedOffer.id)
               ? currentCustomIcon
               : defaultCustomIcon,
-          })
-          .addTo(map);
+          });
+        markers.addLayer(marker);
       });
+      markers.addTo(map);
     }
-  }, [map, currentCustomIcon, defaultCustomIcon, offers, selectedOffer]);
+
+    return () => {
+      markers.clearLayers();
+    };
+
+  }, [map, currentCustomIcon, defaultCustomIcon, offers, selectedOffer, markers]);
 
   return (
     <div

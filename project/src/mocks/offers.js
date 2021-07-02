@@ -7,6 +7,9 @@ export const offers = [
     bedrooms: 3,
     city: {
       name: 'Amsterdam',
+      latitude: 52.370216,
+      longitude: 4.895168,
+      zoom: 10,
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
@@ -37,6 +40,9 @@ export const offers = [
     bedrooms: 3,
     city: {
       name: 'Amsterdam',
+      latitude: 52.370216,
+      longitude: 4.895168,
+      zoom: 10,
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
@@ -67,6 +73,9 @@ export const offers = [
     bedrooms: 3,
     city: {
       name: 'Amsterdam',
+      latitude: 52.370216,
+      longitude: 4.895168,
+      zoom: 10,
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
@@ -97,6 +106,9 @@ export const offers = [
     bedrooms: 3,
     city: {
       name: 'Amsterdam',
+      latitude: 52.370216,
+      longitude: 4.895168,
+      zoom: 10,
     },
     description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
@@ -122,4 +134,38 @@ export const offers = [
     isFavorite: false,
     isPremium: true,
   },
+  {
+    id: nanoid(LENGTH_ID),
+    bedrooms: 3,
+    city: {
+      name: 'Paris',
+      latitude: 52.370216,
+      longitude: 4.895168,
+      zoom: 10,
+    },
+    description: 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    goods: ['Heating', 'Kitchen', 'Cable TV', 'Washing machine', 'Coffee machine', 'Dishwasher'],
+    host: {
+      avatarUrl: 'img/1.png',
+      id: nanoid(LENGTH_ID),
+      isPro: true,
+      name: 'Angelina',
+    },
+    location: {
+      latitude: 52.48514938496378,
+      longitude: 4.713877537499948,
+      zoom: 8,
+    },
+    images: ['img/1.png', 'img/2.png'],
+    maxAdults: 4,
+    previewImage: 'img/apartment-03.jpg',
+    price: 180,
+    ratingPercent: 100,
+    rating: 5,
+    name: 'Nice, cozy, warm big bed apartment',
+    type: 'Apartment',
+    isFavorite: false,
+    isPremium: true,
+  },
+
 ];
