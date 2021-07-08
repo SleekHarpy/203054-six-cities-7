@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 import {useParams} from 'react-router-dom';
 import ReviewForm from '../review-form/review-form';
 import Header from '../header/header';
+import { connect } from 'react-redux';
 
-function RoomScreen(props) {
-  const {offers} = props;
+function RoomScreen({offers}) {
   const {id} = useParams();
-  const offer = offers.find((item) => item.id === id);
+  const offer = offers.find((item) => item.id === Number(id));
   const {images, isPremium, name, isFavorite, ratingPercent, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
 
   return (
@@ -149,4 +149,9 @@ RoomScreen.propTypes = {
   ),
 };
 
-export default RoomScreen;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export { RoomScreen };
+export default connect(mapStateToProps, null)(RoomScreen);

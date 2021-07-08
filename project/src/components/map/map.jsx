@@ -7,7 +7,7 @@ import roomProp from '../room-screen/room.prop';
 
 function Map({offers, selectedOffer}) {
   const [offer] = offers;
-  const location = [offer.city.latitude, offer.city.longitude];
+  const location = [offer.city.location.latitude, offer.city.location.longitude];
   const mapRef = useRef(null);
   const map = useMap(mapRef, location);
   const markers = leaflet.layerGroup();

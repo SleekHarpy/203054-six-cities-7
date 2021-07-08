@@ -5,10 +5,9 @@ import Card from '../card/card';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import { getFavoriteCities } from '../../utils/common';
+import { connect } from 'react-redux';
 
-function FavoritesScreen(props) {
-  const {offers} = props;
-
+function FavoritesScreen({offers}) {
   const cities = getFavoriteCities(offers);
 
   return (
@@ -51,4 +50,9 @@ FavoritesScreen.propTypes = {
   ),
 };
 
-export default FavoritesScreen;
+const mapStateToProps = (state) => ({
+  offers: state.offers,
+});
+
+export { FavoritesScreen };
+export default connect(mapStateToProps, null)(FavoritesScreen);
