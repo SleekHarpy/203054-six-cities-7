@@ -1,3 +1,5 @@
+import { AuthorizationStatus } from '../const';
+
 export const getFavoriteCities = (offers) => {
   const filteredCities = offers
     .filter((item) => item.isFavorite )
@@ -9,3 +11,6 @@ export const getFavoriteCities = (offers) => {
 };
 
 export const getSortedOffersList = (offers, city) => offers.filter((offer) => offer.city.name === city);
+
+export const isCheckedAuth = (authorizationStatus) =>
+  authorizationStatus === AuthorizationStatus.UNKNOWN;
