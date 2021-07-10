@@ -10,12 +10,15 @@ import NotFoundScreen from '../not-found-screed/not-found-screen';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { connect } from 'react-redux';
 import { isCheckedAuth } from '../../utils/common';
+import PrivateRoute from '../private-route/private-route';
 
 function App({authorizationStatus, isDataLoaded}) {
 
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return <LoadingScreen />;
   }
+
+  const returnFavoritesScreen = () => <FavoritesScreen />;
 
   return (
     <BrowserRouter>
@@ -26,9 +29,12 @@ function App({authorizationStatus, isDataLoaded}) {
         <Route exact path={AppRoute.LOGIN}>
           <AuthScreen />
         </Route>
-        <Route exact path={AppRoute.FAVORITES}>
-          <FavoritesScreen />
-        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.FAVORITES}
+          authorizationStatus={authorizationStatus}
+          render={returnFavoritesScreen}
+        />
         <Route exact path={AppRoute.OFFER}>
           <RoomScreen />
         </Route>
