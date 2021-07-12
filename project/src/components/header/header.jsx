@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 function Header({authorizationStatus}) {
-  const isAuthorized = authorizationStatus === 'AUTH';
+  const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
   const email = localStorage.getItem('email');
 
   return (
