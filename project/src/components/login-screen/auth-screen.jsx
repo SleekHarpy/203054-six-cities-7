@@ -15,10 +15,12 @@ function AuthScreen({onSubmit}) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    onsubmit({
+    onSubmit({
       login: loginRef.current.value,
       password: passwordRef.current.value,
     });
+
+    history.push(AppRoute.ROOT);
   };
 
   return(
@@ -77,7 +79,6 @@ function AuthScreen({onSubmit}) {
                 />
               </div>
               <button
-                onClick={() => history.push(AppRoute.ROOT)}
                 className="login__submit form__submit button"
                 type="submit"
               >
