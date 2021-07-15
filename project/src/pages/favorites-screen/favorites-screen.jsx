@@ -1,13 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import roomProp from '../room-screen/room.prop';
-import Card from '../card/card';
-import Header from '../header/header';
-import Footer from '../footer/footer';
+import Card from '../../components/card/card';
+import Header from '../../components/header/header';
+import Footer from '../../components/footer/footer';
 import { getFavoriteCities } from '../../utils/common';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getOffers } from '../../store/app-data/selectors';
 
-function FavoritesScreen({offers}) {
+function FavoritesScreen() {
+  const offers = useSelector(getOffers);
   const cities = getFavoriteCities(offers);
 
   return (
@@ -44,15 +44,4 @@ function FavoritesScreen({offers}) {
   );
 }
 
-FavoritesScreen.propTypes = {
-  offers: PropTypes.arrayOf(
-    PropTypes.oneOfType([roomProp]).isRequired,
-  ),
-};
-
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-});
-
-export { FavoritesScreen };
-export default connect(mapStateToProps, null)(FavoritesScreen);
+export default FavoritesScreen;

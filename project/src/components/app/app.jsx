@@ -1,16 +1,18 @@
 import React from 'react';
-import Main from '../main/main';
+import MainScreen from '../../pages/main-screen/main-screen';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import AuthScreen from '../login-screen/auth-screen';
-import FavoritesScreen from '../favorites-screen/favorites-screen';
-import RoomScreen from '../room-screen/room-screen';
-import NotFoundScreen from '../not-found-screed/not-found-screen';
-import LoadingScreen from '../loading-screen/loading-screen';
+import AuthScreen from '../../pages/login-screen/auth-screen';
+import FavoritesScreen from '../../pages/favorites-screen/favorites-screen';
+import RoomScreen from '../../pages/room-screen/room-screen';
+import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import { connect } from 'react-redux';
 import { isCheckedAuth } from '../../utils/common';
 import PrivateRoute from '../private-route/private-route';
+import { getAuthorizationStatus } from '../../store/user/selectors';
+import { getLoadedDataStatus } from '../../store/app-data/selectors';
 
 function App({authorizationStatus, isDataLoaded}) {
 
@@ -24,7 +26,7 @@ function App({authorizationStatus, isDataLoaded}) {
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.ROOT}>
-          <Main />
+          <MainScreen />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
           <AuthScreen />
@@ -52,8 +54,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
-  isDataLoaded: state.isDataLoaded,
+  authorizationStatus: getAuthorizationStatus(state),
+  isDataLoaded: getLoadedDataStatus(state),
 });
 
 export { App };

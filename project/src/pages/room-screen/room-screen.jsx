@@ -1,14 +1,14 @@
 import React from 'react';
-import roomProp from './room.prop';
-import OffersList from '../offers-list/offers-list';
-import PropTypes from 'prop-types';
+import OffersList from '../../components/offers-list/offers-list';
 import {useParams} from 'react-router-dom';
-import ReviewForm from '../review-form/review-form';
-import Header from '../header/header';
-import { connect } from 'react-redux';
+import ReviewForm from '../../components/review-form/review-form';
+import Header from '../../components/header/header';
+import { useSelector } from 'react-redux';
+import { getOffers } from '../../store/app-data/selectors';
 
-function RoomScreen({offers}) {
+function RoomScreen() {
   const {id} = useParams();
+  const offers = useSelector(getOffers);
   const offer = offers.find((item) => item.id === Number(id));
   const {images, isPremium, name, isFavorite, ratingPercent, rating, type, bedrooms, maxAdults, price, goods, host, description} = offer;
 
@@ -143,15 +143,4 @@ function RoomScreen({offers}) {
   );
 }
 
-RoomScreen.propTypes = {
-  offers: PropTypes.arrayOf(
-    PropTypes.oneOfType([roomProp]).isRequired,
-  ),
-};
-
-const mapStateToProps = (state) => ({
-  offers: state.offers,
-});
-
-export { RoomScreen };
-export default connect(mapStateToProps, null)(RoomScreen);
+export default RoomScreen;

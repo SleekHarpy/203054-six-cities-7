@@ -1,16 +1,20 @@
 import React, { useRef } from 'react';
-import HeaderLogo from '../header-logo/header-logo';
+import HeaderLogo from '../../components/header-logo/header-logo';
 import { useHistory } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '../../store/api-actions';
 
-function AuthScreen({onSubmit}) {
+function AuthScreen() {
   const loginRef = useRef();
   const passwordRef = useRef();
 
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const onSubmit = (authData) => {
+    dispatch(login(authData));
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -99,15 +103,4 @@ function AuthScreen({onSubmit}) {
   );
 }
 
-AuthScreen.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit(authData) {
-    dispatch(login(authData));
-  },
-});
-
-export { AuthScreen };
-export default connect(null, mapDispatchToProps)(AuthScreen);
+export default AuthScreen;

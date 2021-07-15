@@ -1,16 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import roomProp from '../room-screen/room.prop';
-import Header from '../header/header';
-import Tabs from '../tabs/tabs';
-import { ActionCreator } from '../../store/action';
+import Header from '../../components/header/header';
+import Tabs from '../../components/tabs/tabs';
 import { getSortedOffersList } from '../../utils/common';
-import { connect } from 'react-redux';
-import Cities from '../cities/cities';
-import CitiesEmpty from '../cities-empty/cities-empty';
+import { useDispatch, useSelector } from 'react-redux';
+import Cities from '../../components/cities/cities';
+import CitiesEmpty from '../../components/cities-empty/cities-empty';
+import { changeCity } from '../../store/action';
+import { getCity, getOffers } from '../../store/app-data/selectors';
 
-function Main(props) {
-  const {offers, city, onCityChange} = props;
+function MainScreen() {
+  const city = useSelector(getCity);
+  const offers = useSelector(getOffers);
+  const sortedOffers = getSortedOffersList(offers, city);
+
+  const dispatch = useDispatch();
+
+  const onCityChange = (evt) => {
+    dispatch(changeCity(evt.target.textContent));
+  };
 
   return (
     <>
@@ -32,11 +39,11 @@ function Main(props) {
 
         <Header />
 
-        <main className={`page__main page__main--index ${offers.length === 0 ? 'page__main--index-empty' : ''}`}>
+        <main className={`page__main page__main--index ${sortedOffers.length === 0 ? 'page__main--index-empty' : ''}`}>
           <h1 className="visually-hidden">Cities</h1>
           <Tabs onCityChange={onCityChange} cityTab={city} />
-          { offers.length > 0 ?
-            <Cities offers={offers} city={city} /> :
+          { sortedOffers.length > 0 ?
+            <Cities offers={sortedOffers} city={city} /> :
             <CitiesEmpty city={city} /> }
         </main>
       </div>
@@ -44,24 +51,4 @@ function Main(props) {
   );
 }
 
-Main.propTypes = {
-  offers: PropTypes.arrayOf(
-    PropTypes.oneOfType([roomProp]).isRequired,
-  ),
-  city: PropTypes.string.isRequired,
-  onCityChange: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: getSortedOffersList(state.offers, state.city),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onCityChange(evt) {
-    dispatch(ActionCreator.changeCity(evt.target.textContent));
-  },
-});
-
-export { Main };
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default MainScreen;

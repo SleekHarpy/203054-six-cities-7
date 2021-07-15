@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/user/selectors';
 
 function Header({authorizationStatus}) {
   const isAuthorized = authorizationStatus === AuthorizationStatus.AUTH;
@@ -52,7 +53,7 @@ Header.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  authorizationStatus: state.authorizationStatus,
+  authorizationStatus: getAuthorizationStatus(state),
 });
 
 export { Header };

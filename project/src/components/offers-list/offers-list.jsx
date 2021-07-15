@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import roomProp from '../room-screen/room.prop';
+import roomProp from '../../pages/room-screen/room.prop';
 import Card from '../card/card';
 
 function OffersList({offers, onListItemHover}) {

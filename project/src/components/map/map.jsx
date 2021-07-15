@@ -3,7 +3,7 @@ import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import useMap from '../../hooks/useMap';
 import PropTypes from 'prop-types';
-import roomProp from '../room-screen/room.prop';
+import roomProp from '../../pages/room-screen/room.prop';
 
 function Map({offers, selectedOffer}) {
   const [offer] = offers;

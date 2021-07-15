@@ -1,26 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { reducer } from './store/reducer';
+import rootReducer from './store/root-reducer';
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import { createAPI } from './services/api';
-import { ActionCreator } from './store/action';
 import { AuthorizationStatus } from './const';
 import { checkAuth, fetchHotelsList } from './store/api-actions';
+import { requireAuthorization } from './store/action';
+import { configureStore } from '@reduxjs/toolkit';
+import { redirect } from './store/middlewares/redirect';
 
 const api = createAPI(
-  () => store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH)),
+  () => store.dispatch(requireAuthorization(AuthorizationStatus.NO_AUTH)),
 );
 
-const store = createStore(
-  reducer,
-  composeWithDevTools(
-    applyMiddleware(thunk.withExtraArgument(api)),
-  ),
-);
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }).concat(redirect),
+});
 
 store.dispatch(checkAuth());
 store.dispatch(fetchHotelsList());
